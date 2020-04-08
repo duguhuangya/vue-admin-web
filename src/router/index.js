@@ -7,7 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 import NavTest from './modules/nav-test'
 import { Message } from 'element-ui'
-import getTitle from '@/utils/getTitle'
+import getTitle from '@/libs/getTitle'
 
 /**
  * 路由相关属性说明

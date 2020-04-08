@@ -156,9 +156,7 @@ export default {
       this.show = true
     },
     handleClose() {},
-    handleleft() {
-      debugger
-    }
+    handleleft() {}
   },
   mounted() {},
   beforeCreate() {}, //生命周期 - 创建之前

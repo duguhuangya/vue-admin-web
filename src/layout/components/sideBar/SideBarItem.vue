@@ -30,7 +30,7 @@
 
 <script>
 import PageLink from './Link'
-import { isAbsolutePath } from '@/utils/validate'
+import { isAbsolutePath } from '@/libs/validate'
 import path from 'path'
 export default {
   name: 'SidebarItem',
@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     hasOnlyChild(children = [], item) {
-      // debugger
       let newChildren = children.filter(obj => {
         if (obj.hidden) {
           return false
