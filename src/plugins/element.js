@@ -154,3 +154,4 @@ Vue.use(Calendar)
 // Vue.use(CascaderPanel)
 
 Vue.use(Loading.directive)
+Vue.prototype.$notify = Notification

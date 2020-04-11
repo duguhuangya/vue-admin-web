@@ -1,13 +1,7 @@
 <!-- 组件说明 -->
 <template>
   <div class="form">
-    <el-form
-      :model="ruleForm"
-      :rules="rules"
-      ref="ruleForm"
-      label-width="100px"
-      class="demo-ruleForm"
-    >
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="活动名称" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
@@ -20,22 +14,13 @@
       <el-form-item label="活动时间" required>
         <el-col :span="11">
           <el-form-item prop="date1">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="ruleForm.date1"
-              style="width: 100%;"
-            ></el-date-picker>
+            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
           </el-form-item>
         </el-col>
         <el-col class="line" :span="2">-</el-col>
         <el-col :span="11">
           <el-form-item prop="date2">
-            <el-time-picker
-              placeholder="选择时间"
-              v-model="ruleForm.date2"
-              style="width: 100%;"
-            ></el-time-picker>
+            <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
           </el-form-item>
         </el-col>
       </el-form-item>
@@ -60,18 +45,40 @@
         <el-input type="textarea" v-model="ruleForm.desc"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')"
-          >立即创建</el-button
-        >
+        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
         <el-button @click="handleClick">调起模态框</el-button>
-        <com-dialog
-          :visibleDialog.sync="show"
-          :buttonTexts="buttonTexts1"
-          :title="tit"
-          @close="handleClose"
-          @handleleftButton="handleleft"
-        ></com-dialog>
+        <com-dialog :visibleDialog.sync="show" :buttonTexts="buttonTexts1" :title="tit" @close="handleClose" @handleleftButton="handleleft">
+          <slot>
+            <el-form ref="elForm" :model="formData" :rules="rules1" size="medium" label-width="px">
+              <el-row>
+                <el-form-item label-width="120px" label="公司名称" prop="companyName">
+                  <el-input v-model="formData.companyName" placeholder="请输入公司名称" clearable :style="{width: '100%'}">
+                  </el-input>
+                </el-form-item>
+              </el-row>
+              <el-row>
+                <el-form-item label-width="120px" label="期限" prop="limits">
+                  <el-input v-model="formData.limits" placeholder="请输入期限" clearable :style="{width: '100%'}"></el-input>
+                </el-form-item>
+              </el-row>
+              <el-row>
+                <el-form-item label-width="120px" label="关联账号" prop="relate">
+                  <el-input v-model="formData.relate" placeholder="请输入关联账号" clearable :style="{width: '100%'}"></el-input>
+                </el-form-item>
+              </el-row>
+              <el-row>
+                <el-form-item label-width="120px" label="备注" prop="remark">
+                  <el-input v-model="formData.remark" placeholder="请输入备注" clearable :style="{width: '100%'}"></el-input>
+                </el-form-item>
+              </el-row>
+              <!-- <el-form-item size="large">
+                <el-button type="primary" @click="submitForm">提交</el-button>
+                <el-button @click="resetForm">重置</el-button>
+              </el-form-item> -->
+            </el-form>
+          </slot>
+        </com-dialog>
       </el-form-item>
     </el-form>
   </div>
@@ -133,8 +140,44 @@ export default {
         desc: [{ required: true, message: '请填写活动形式', trigger: 'blur' }]
       },
       show: false,
-      buttonTexts1: ['通过审核', '取消'],
-      tit: 'gaohan'
+      buttonTexts1: ['取消', '通过审核'],
+      tit: 'gaohan',
+      formData: {
+        companyName: undefined,
+        limits: undefined,
+        relate: undefined,
+        remark: undefined
+      },
+      rules1: {
+        companyName: [
+          {
+            required: true,
+            message: '请输入公司名称',
+            trigger: 'blur'
+          }
+        ],
+        limits: [
+          {
+            required: true,
+            message: '请输入期限',
+            trigger: 'blur'
+          }
+        ],
+        relate: [
+          {
+            required: true,
+            message: '请输入关联账号',
+            trigger: 'blur'
+          }
+        ],
+        remark: [
+          {
+            required: true,
+            message: '请输入备注',
+            trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   computed: {},

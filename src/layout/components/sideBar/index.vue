@@ -1,5 +1,9 @@
 <template>
   <div class="sideBar" id="domSideBar">
+    <div class="logo">
+      <img src="../../../assets/pageBg/logo.png" alt="" />
+    </div>
+
     <el-scrollbar>
       <el-menu
         :default-active="activeMenu"
@@ -38,3 +42,13 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.logo {
+  width: 68px;
+  height: 70px;
+  margin: 43px auto 31px;
+  img {
+    width: 100%;
+  }
+}
+</style>

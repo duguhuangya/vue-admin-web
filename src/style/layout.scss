@@ -8,19 +8,23 @@
     position: relative;
     background-color: $bg-gary;
     .wrapper_con {
-      height: calc(100% - 50px);
+      //   height: calc(100% - 50px);
+      //   height: calc(100%);
       width: 100%;
       // margin-top: 50px;
       padding-top: 50px;
     }
   }
   .pageMain {
+    padding: 20px;
     margin-left: 200px;
     transition: all 0.3s;
     height: 100%;
+    background: $bg-gary;
     & > div {
-      padding: 36px 30px;
-      background: $bg-gary;
+      //   padding: 26px 20px;
+      background: $white;
+      height: 100vh;
     }
   }
   .noPadding {
@@ -31,7 +35,7 @@
 #app {
   .sideBar {
     width: $sideBarWidth;
-    height: calc(100% - 50px);
+    height: calc(100%);
     background-color: $dark-blue;
     position: fixed;
     bottom: 0;

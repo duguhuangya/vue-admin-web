@@ -3,51 +3,72 @@
     <div class="slideShadow" v-show="showSlide">
       <transition>
         <div class="slideSty animated bounce">
-          <slide-verify
-            @success="onSuccess"
-            @fail="onFail"
-            :sliderText="text"
-            :w="350"
-            :h="175"
-            ref="slideDiv"
-          ></slide-verify>
+          <slide-verify @success="onSuccess" @fail="onFail" :sliderText="text" :w="350" :h="175" ref="slideDiv"></slide-verify>
           <div class="iconBtn">
-            <i class="el-icon-circle-close" @click="showSlide = false"></i
-            ><i class="el-icon-refresh" @click="refresh"></i>
+            <i class="el-icon-circle-close" @click="showSlide = false"></i>
+            <i class="el-icon-refresh" @click="refresh"></i>
           </div>
         </div>
       </transition>
     </div>
     <div class="loginBox">
-      <h2 class="loginH2"><strong>Vue</strong> 后台管理系统</h2>
       <div class="loginCon">
         <div class="titleDiv">
-          <h3>Sign up now</h3>
-          <p>Enter your username and password to log on:</p>
-          <i class="el-icon-key"></i>
+          <h3>{{ title }}</h3>
+
+          <!-- <i class="el-icon-key"></i> -->
+          <div class="img">
+            <img src="../../assets/pageBg/logo.png" alt />
+          </div>
+          <p>欢迎使用智掘内容风控总台</p>
         </div>
-        <el-form ref="loginForm" :rules="rules" :model="ruleForm">
+        <!-- 登录 -->
+        <el-form ref="loginForm" :rules="rules" :model="ruleForm" v-show="!flg">
           <el-form-item prop="user">
-            <el-input
-              placeholder="请输入账号"
-              prefix-icon="el-icon-user"
-              v-model="ruleForm.user"
-            ></el-input>
+            <el-input placeholder="请输入账号" prefix-icon="el-icon-user" v-model="ruleForm.user"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              placeholder="请输入密码"
-              prefix-icon="el-icon-lock"
-              v-model="ruleForm.password"
-              show-password
-            ></el-input>
+            <el-input placeholder="请输入密码" prefix-icon="el-icon-lock" v-model="ruleForm.password" show-password></el-input>
           </el-form-item>
-          <el-button
-            type="primary"
-            class="loginBtn"
-            @click="loginYz('loginForm')"
-            >登录</el-button
-          >
+          <div class="loginBtn">
+            <el-button type="primary" @click="loginYz('loginForm')">登录</el-button>
+
+            <el-link type="primary" @click="
+                flg = !flg;
+                title = '修改密码';
+              " :underline="false">注册新账号</el-link>
+          </div>
+        </el-form>
+        <!-- 修改密码 -->
+        <el-form ref="elForm" :model="formData" :rules="rules1" size="medium" label-width="px" label-position="left" v-show="flg">
+          <el-form-item label prop="mobile">
+            <el-input v-model="formData.mobile" placeholder="请输入手机号" clearable prefix-icon="el-icon-mobile-phone" :style="{ width: '100%' }"></el-input>
+          </el-form-item>
+
+          <el-form-item label prop="code">
+            <el-input v-model="formData.code" placeholder="请输入验证码" clearable prefix-icon="el-icon-eleme" :style="{ width: '100%' }"></el-input>
+            <el-button type="primary">获取验证码</el-button>
+          </el-form-item>
+
+          <el-form-item label prop="password">
+            <el-input v-model="formData.password" placeholder="请输入密码" clearable :style="{ width: '100%' }"></el-input>
+          </el-form-item>
+
+          <el-row type="flex" class="row-bg" justify="center">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-button type="primary" @click="submitForm">确认修改</el-button>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-link type="primary" @click="flg = !flg" :underline="false">已有账号?去登陆</el-link>
+          </el-row>
+
+          <!-- <el-form-item size="large">
+            <el-button type="primary" @click="submitForm">提交</el-button>
+            <el-button @click="resetForm">重置</el-button>
+          </el-form-item>-->
         </el-form>
       </div>
     </div>
@@ -72,13 +93,53 @@ export default {
           { min: 3, max: 15, message: '长度在3到5个字符', trigger: 'blur' }
         ],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      }
+      },
+      formData: {
+        mobile: undefined,
+        code: undefined,
+        password: undefined
+      },
+      rules1: {
+        mobile: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          }
+        ],
+        code: [
+          {
+            required: true,
+            message: '请输入验证码',
+            trigger: 'blur'
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          }
+        ]
+      },
+      flg: false,
+      show: true, // 初始启用按钮
+      count: '', // 初始化次数
+      timer: null,
+      title: '登录'
     }
   },
   mounted() {
     this.shopTip()
   },
   methods: {
+    //确认修改密码
+    submitForm() {
+      this.$refs['elForm'].validate(valid => {
+        if (!valid) return
+        // TODO 提交表单
+      })
+    },
     onSuccess() {
       this.showSlide = false
       this._login()
@@ -133,16 +194,18 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+// .loginCon .el-form-item {
+//   width: 250px;
+//   margin: 30px auto;
+// }
 .login {
   height: 100%;
   width: 100%;
-  background: url(../../assets/pageBg/loginBg.jpg) no-repeat center center;
+  background: url(../../assets/pageBg/login_bg.png) no-repeat center center;
   background-size: 100% 100%;
   overflow: hidden;
 }
 .loginBox {
-  height: 455px;
-  width: 550px;
   margin: 0 auto;
   position: relative;
   top: 50%;
@@ -154,14 +217,21 @@ export default {
   text-align: center;
 }
 .loginCon {
-  margin-top: 30px;
+  width: 477px;
+  height: 584px;
+  //   margin-top: 30px;
   background: #eee;
   border-radius: 4px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 5px 11px 0px rgba(0, 0, 0, 0.41);
+
+  position: absolute;
+  right: 15%;
   .titleDiv {
     padding: 0 28px;
     background: #fff;
     position: relative;
-    height: 120px;
+    // height: 120px;
     border-radius: 4px 4px 0 0;
     h3 {
       font-size: 22px;
@@ -169,10 +239,20 @@ export default {
       font-weight: initial;
       padding-top: 23px;
     }
+    .img {
+      width: 67px;
+      height: 69px;
+      margin: 5px auto 32px auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
     p {
       font-size: 16px;
       color: #888;
       padding-top: 12px;
+      text-align: center;
     }
     i {
       font-size: 65px;
@@ -184,13 +264,17 @@ export default {
   }
   .el-form {
     padding: 25px 25px 30px 25px;
-    background: #eee;
+    // background: #eee;
     border-radius: 0 0 4px 4px;
   }
 }
 .loginBtn {
-  width: 100%;
-  background: #19b9e7;
+  width: 56%;
+  margin: 0 auto;
+  button {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 .slideShadow {
   position: fixed;
