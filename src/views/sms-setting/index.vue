@@ -143,7 +143,7 @@ export default {
     // 编辑
     handleEdit(row, ty) {
       this.formData = deepClone(row)
-      this.verifyCode = deepClone(this.formData.templateCode.verifyCode)
+      this.verifyCode = row.templateCode
       //   this.formData = row
       if (ty == 'a') {
         this.dialogFormVisible = true //显示弹框
@@ -170,35 +170,29 @@ export default {
         }
         setSmsData(params)
           .then(res => {
-            this.close()
-            this._getPageTab1()
+            const { code, data } = res
+            if (code == 200) {
+              this.close()
+              this._getPageTab1()
+            }
           })
           .catch(error => {
             this.$message.error(error.message)
           })
       } else {
-        // let params = {
-        //   //   templateCode: `{verifyCode:${this.verifyCode}}`
-        //   templateCode: { verifyCode: this.verifyCode }
-        // }
-        // if (isSmsModel) {
-        //   params = JSON.parse(JSON.stringify(this.tableData1[0]))
-        //   params.templateCode = row.templateCode
-        // } else {
-        //   params = JSON.parse(JSON.stringify(row))
-        // }
         let params = {}
         // params = JSON.parse(JSON.stringify(this.tableData1[0]))
-        params.templateCode = {
-          verifyCode: this.verifyCode
-        }
-        params = JSON.parse(JSON.stringify(params))
+        params.templateCode = this.verifyCode
+        // params = JSON.parse(JSON.stringify(params))
         // let params = { templateCode: { verifyCode: 'SMS_17846012711' } }
 
         setSmsTem(params)
           .then(res => {
-            this.close()
-            this._getPageTab1()
+            const { code, data } = res
+            if (code == 200) {
+              this.close()
+              this._getPageTab1()
+            }
           })
           .catch(error => {
             this.$message.error(error.message)
