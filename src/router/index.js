@@ -35,53 +35,16 @@ export const currencyRoutes = [
         hidden: true
     },
     {
-        path: '/account',
+        path: '/',
+        name: 'Home',
         component: Layout,
-        name: 'Account',
-        redirect: '/account/index',
+        redirect: '/dashbord',
         children: [
             {
-                path: 'index',
-                name: 'Account-index',
-                component: () => import('@/views/account-manage'),
-                meta: {
-                    title: '账户管理',
-                    icon: 'el-icon-picture-outline'
-                }
-            }
-        ]
-    },
-    {
-        path: '/company',
-        component: Layout,
-        name: 'Company',
-        redirect: '/company/index',
-        children: [
-            {
-                path: 'index',
-                name: 'Company-index',
-                component: () => import('@/views/company-manage'),
-                meta: {
-                    title: '公司管理',
-                    icon: 'el-icon-picture-outline',
-                }
-            }
-        ]
-    },
-    {
-        path: '/content',
-        component: Layout,
-        name: 'Content',
-        redirect: '/company/index',
-        children: [
-            {
-                path: 'index',
-                name: 'Content-query',
-                component: () => import('@/views/content-query'),
-                meta: {
-                    title: '内容查询',
-                    icon: 'el-icon-picture-outline',
-                }
+                path: 'dashbord',
+                name: 'Dashbord',
+                component: () => import('@/views/dashboard'),
+                meta: { title: '数据统计', icon: 'el-icon-s-data' }
             }
         ]
     },
@@ -97,22 +60,8 @@ export const currencyRoutes = [
                 component: () => import('@/views/sms-setting'),
                 meta: {
                     title: '短信配置',
-                    icon: 'el-icon-picture-outline',
+                    icon: 'el-icon-chat-dot-square',
                 }
-            }
-        ]
-    },
-    {
-        path: '/',
-        name: 'Home',
-        component: Layout,
-        redirect: '/dashbord',
-        children: [
-            {
-                path: 'dashbord',
-                name: 'Dashbord',
-                component: () => import('@/views/dashboard'),
-                meta: { title: '数据统计', icon: 'el-icon-s-data' }
             }
         ]
     },
@@ -148,45 +97,98 @@ export const currencyRoutes = [
 ]
 /*动态添加routers*/
 export const asyncRoutes = [
+    // {
+    //     path: '/permission',
+    //     name: 'Permission',
+    //     component: Layout,
+    //     redirect: '/permission/page-use',
+    //     meta: {
+    //         title: '权限许可',
+    //         icon: 'el-icon-lock'
+    //     },
+    //     children: [
+    //         {
+    //             path: 'page-user',
+    //             name: 'PageUser',
+    //             component: () => import('@/views/permission/page-user'),
+    //             meta: {
+    //                 title: '用户页面',
+    //                 icon: 'el-icon-user'
+    //             }
+    //         },
+    //         {
+    //             path: 'page-admin',
+    //             name: 'PageAdmin',
+    //             component: () => import('@/views/permission/page-admin'),
+    //             meta: {
+    //                 title: '管理员页面',
+    //                 icon: 'el-icon-user-solid'
+    //             }
+    //         },
+    //         {
+    //             path: 'roles',
+    //             name: 'Roles',
+    //             component: () => import('@/views/permission/roles'),
+    //             meta: {
+    //                 title: '权限设置',
+    //                 icon: 'el-icon-s-tools'
+    //             }
+    //         }
+    //     ]
+    // },
     {
-        path: '/permission',
-        name: 'Permission',
+        path: '/company',
         component: Layout,
-        redirect: '/permission/page-use',
-        meta: {
-            title: '权限许可',
-            icon: 'el-icon-lock'
-        },
+        name: 'Company',
+        redirect: '/company/index',
         children: [
             {
-                path: 'page-user',
-                name: 'PageUser',
-                component: () => import('@/views/permission/page-user'),
+                path: 'index',
+                name: 'Company-index',
+                component: () => import('@/views/company-manage'),
                 meta: {
-                    title: '用户页面',
-                    icon: 'el-icon-user'
-                }
-            },
-            {
-                path: 'page-admin',
-                name: 'PageAdmin',
-                component: () => import('@/views/permission/page-admin'),
-                meta: {
-                    title: '管理员页面',
-                    icon: 'el-icon-user-solid'
-                }
-            },
-            {
-                path: 'roles',
-                name: 'Roles',
-                component: () => import('@/views/permission/roles'),
-                meta: {
-                    title: '权限设置',
-                    icon: 'el-icon-s-tools'
+                    title: '公司管理',
+                    icon: 'el-icon-office-building',
                 }
             }
         ]
     },
+    {
+        path: '/account',
+        component: Layout,
+        name: 'Account',
+        redirect: '/account/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Account-index',
+                component: () => import('@/views/account-manage'),
+                meta: {
+                    title: '账户管理',
+                    icon: 'el-icon-user-solid'
+                }
+            }
+        ]
+    },
+
+    {
+        path: '/content',
+        component: Layout,
+        name: 'Content',
+        redirect: '/company/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Content-query',
+                component: () => import('@/views/content-query'),
+                meta: {
+                    title: '内容查询',
+                    icon: 'el-icon-search',
+                }
+            }
+        ]
+    },
+
     // {
     //     path: '/table',
     //     name: 'Table',
@@ -211,30 +213,30 @@ export const asyncRoutes = [
     //         }
     //     ]
     // },
-    {
-        path: '/menu',
-        name: 'Menu',
-        redirect: '/menu/menu-1',
-        component: Layout,
-        meta: {
-            title: '我的菜单项',
-            icon: 'el-icon-table iconfont'
-        },
-        children: [
-            {
-                path: 'menu-1',
-                name: 'MenuOne',
-                component: () => import('@/views/menu/menu-1'),
-                meta: { title: '子菜单1' }
-            },
-            {
-                path: 'menu-2',
-                name: 'MenuTwo',
-                component: () => import('@/views/menu/menu-2'),
-                meta: { title: '子菜单2' }
-            }
-        ]
-    },
+    // {
+    //     path: '/menu',
+    //     name: 'Menu',
+    //     redirect: '/menu/menu-1',
+    //     component: Layout,
+    //     meta: {
+    //         title: '我的菜单项',
+    //         icon: 'el-icon-table iconfont'
+    //     },
+    //     children: [
+    //         {
+    //             path: 'menu-1',
+    //             name: 'MenuOne',
+    //             component: () => import('@/views/menu/menu-1'),
+    //             meta: { title: '子菜单1' }
+    //         },
+    //         {
+    //             path: 'menu-2',
+    //             name: 'MenuTwo',
+    //             component: () => import('@/views/menu/menu-2'),
+    //             meta: { title: '子菜单2' }
+    //         }
+    //     ]
+    // },
     // {
     //     path: '/icons',
     //     component: Layout,
@@ -252,23 +254,23 @@ export const asyncRoutes = [
     //         }
     //     ]
     // },
-    {
-        path: '/form',
-        component: Layout,
-        name: 'Form',
-        redirect: '/form/index',
-        children: [
-            {
-                path: 'index',
-                name: 'Form-index',
-                component: () => import('@/views/form'),
-                meta: {
-                    title: 'form表单',
-                    icon: 'el-icon-date'
-                }
-            }
-        ]
-    },
+    // {
+    //     path: '/form',
+    //     component: Layout,
+    //     name: 'Form',
+    //     redirect: '/form/index',
+    //     children: [
+    //         {
+    //             path: 'index',
+    //             name: 'Form-index',
+    //             component: () => import('@/views/form'),
+    //             meta: {
+    //                 title: 'form表单',
+    //                 icon: 'el-icon-date'
+    //             }
+    //         }
+    //     ]
+    // },
     // {
     //     path: '/components',
     //     component: Layout,
@@ -359,29 +361,29 @@ export const asyncRoutes = [
     //         }
     //     ]
     // },
-    {
-        path: '/error',
-        component: Layout,
-        name: 'Error',
-        redirect: '/error/404',
-        children: [
-            {
-                path: '404',
-                name: 'Page404',
-                component: () => import('@/views/error-page/404'),
-                meta: {
-                    title: '404',
-                    icon: 'el-icon-s-release'
-                }
-            }
-        ]
-    },
+    // {
+    //     path: '/error',
+    //     component: Layout,
+    //     name: 'Error',
+    //     redirect: '/error/404',
+    //     children: [
+    //         {
+    //             path: '404',
+    //             name: 'Page404',
+    //             component: () => import('@/views/error-page/404'),
+    //             meta: {
+    //                 title: '404',
+    //                 icon: 'el-icon-s-release'
+    //             }
+    //         }
+    //     ]
+    // },
     //   {
     //     path: 'https://github.com/gcddblue/vue-admin-webapp',
     //     name: 'Github',
     //     meta: { icon: 'el-icon-link', title: '项目链接' }
     //   },
-    NavTest,
+    // NavTest,
     {
         path: '*',
         name: '*404',
@@ -413,25 +415,32 @@ router.beforeEach(async (to, from, next) => {
         next()
     } else {
         if (store.getters.token) {
-            const hasRoles = store.getters.roles.length > 0
-            if (hasRoles) {
-                next()
-            } else {
-                try {
-                    const { roles } = await store.dispatch('user/_getInfo')
-                    const addRoutes = await store.dispatch(
-                        'permission/getAsyncRoutes',
-                        roles
-                    )
-                    router.addRoutes(addRoutes)
+            const { roles } = await store.dispatch('user/_getInfo')
+            const addRoutes = await store.dispatch(
+                'permission/getAsyncRoutes',
+                roles
+            )
+            router.addRoutes(addRoutes)
+            next()
+            // const hasRoles = store.getters.roles.length > 0
+            // if (hasRoles) {
+            //     next()
+            // } else {
+            //     try {
+            //         const { roles } = await store.dispatch('user/_getInfo')
+            //         const addRoutes = await store.dispatch(
+            //             'permission/getAsyncRoutes',
+            //             roles
+            //         )
+            //         router.addRoutes(addRoutes)
 
-                    // hack method to ensure that addRoutes is complete
-                    // set the replace: true, so the navigation will not leave a history record
-                    next({ ...to, replace: true })
-                } catch (error) {
-                    Message.error(error)
-                }
-            }
+            //         // hack method to ensure that addRoutes is complete
+            //         // set the replace: true, so the navigation will not leave a history record
+            //         next({ ...to, replace: true })
+            //     } catch (error) {
+            //         Message.error(error)
+            //     }
+            // }
         } else {
             next({
                 path: '/login',

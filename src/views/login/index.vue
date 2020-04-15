@@ -103,7 +103,7 @@ export default {
       showSlide: false,
       ruleForm: {
         user: 'admin',
-        password: '123456'
+        password: '123qwe'
       },
       rules: {
         user: [
@@ -178,23 +178,30 @@ export default {
       })
     },
     _login() {
-      this.$store
-        .dispatch('user/_login', this.ruleForm)
+      let params = {
+        username: this.ruleForm.user,
+        password: this.ruleForm.password
+      }
+      let self = this
+      self.$store
+        .dispatch('user/_login', params)
         .then(res => {
-          if (!res.data.success) {
-            this.refresh()
+          //   if (!res.data.success) {
+          if (!res.data) {
+            self.refresh()
           } else {
-            console.log(this.$route.query.redirect)
-            this.$router.push('/sms')
-            if (this.notifyObj) {
-              this.notifyObj.close()
+            console.log(self.$route.query.redirect)
+            // self.$router.push(self.$route.query.redirect)
+            self.$router.push('/sms/index')
+            if (self.notifyObj) {
+              self.notifyObj.close()
             }
-            this.notifyObj = null
+            self.notifyObj = null
           }
         })
         .catch(error => {
-          this.refresh()
-          this.$message.error(error)
+          self.refresh()
+          self.$message.error(error)
         })
     },
     shopTip() {

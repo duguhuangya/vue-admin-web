@@ -40,10 +40,13 @@ const actions = {
         return new Promise((resolve, reject) => {
             login(formdatas)
                 .then(res => {
-                    if (res.code === 0) {
-                        if (res.data.success) {
-                            Message.success(res.data.msg)
-                            commit('SET_TOKEN', res.data.token)
+                    // if (res.code === 0) {
+                    if (res.code === 200) {
+                        if (res.data) {
+                            // Message.success(res.data.msg)
+                            // commit('SET_TOKEN', res.data.token)
+                            Message.success('登录成功')
+                            commit('SET_TOKEN', res.data)
                         } else {
                             Message.error(res.data.msg)
                         }
@@ -69,10 +72,10 @@ const actions = {
         return new Promise((resolve, reject) => {
             getInfo()
                 .then(res => {
-                    if (res.code === 0) {
-                        const { name, roles, introduce } = res.data
+                    if (res.code === 200) {
+                        const { username, roles, introduce } = res.data
                         commit('SET_ROLES', roles)
-                        commit('SET_NAME', name)
+                        commit('SET_NAME', username)
                         commit('SET_INTRODUCE', introduce)
                     } else {
                         Message.error(res.msg)
