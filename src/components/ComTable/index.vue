@@ -1,6 +1,5 @@
 <template>
-
-  <el-table :data="tableData" size="medium" fit :header-cell-style="{height: '40px',padding: '0',background: '#f7f9fa','font-size': '12px',color: '#8590a6'}" :row-style="{'font-size': '12px',color: '#212121'}" ref="multipleTable" border stripe @sort-change="handleSort" @filter-change="filterHandler" @row-click="handleRowClick">
+  <el-table  :data="tableData" size="medium" fit :header-cell-style="{height: '60px',padding: '0',background: '#F8FAFF','font-size': '12px',color: '#8590a6'}" :row-style="{'font-size': '12px',color: '#212121'}" ref="multipleTable" @sort-change="handleSort" @filter-change="filterHandler" @row-click="handleRowClick">
     <el-table-column v-for="(th, key) in tableHeader" :key="key" :prop="th.prop" :label="th.label" :fixed="th.fixed" :sortable="th.sortable?'custom':false" :filters="th.filters" :column-key="th.columnKey" :filtered-value="th.filteredValue" :filter-multiple="th.filterMultiple" :min-width="th.minWidth" align="center">
       <template slot-scope="scope">
         <ex-slot v-if="th.render" :render="th.render" :row="scope.row" :index="scope.$index" :column="th" />
@@ -70,5 +69,10 @@ export default {
 <style lang="scss">
 .table {
   padding: 20px;
+}
+.el-table{
+    // border:1px solid rgba(227,227,227,1);
+    border: none;
+    position: static;
 }
 </style>

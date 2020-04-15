@@ -17,26 +17,44 @@
           <h3>{{ title }}</h3>
 
           <!-- <i class="el-icon-key"></i> -->
-          <div class="img">
-            <img src="../../assets/pageBg/logo.png" alt />
+          <div class="welcome" v-show="!flg">
+            <div class="img">
+              <img src="../../assets/pageBg/logo.png" alt />
+            </div>
+            <p>欢迎使用智掘内容风控总台</p>
           </div>
-          <p>欢迎使用智掘内容风控总台</p>
+
         </div>
         <!-- 登录 -->
         <el-form ref="loginForm" :rules="rules" :model="ruleForm" v-show="!flg">
           <el-form-item prop="user">
-            <el-input placeholder="请输入账号" prefix-icon="el-icon-user" v-model="ruleForm.user"></el-input>
+            <el-input placeholder="请输入手机号/用户名" prefix-icon="el-icon-user" v-model="ruleForm.user"></el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input placeholder="请输入密码" prefix-icon="el-icon-lock" v-model="ruleForm.password" show-password></el-input>
           </el-form-item>
           <div class="loginBtn">
             <el-button type="primary" @click="loginYz('loginForm')">登录</el-button>
-
-            <el-link type="primary" @click="
+            <el-row type="flex" class="row-bg" justify="space-between" style="width:332px">
+              <el-col :span="6">
+                <div class="grid-content bg-purple">
+                  <el-link type="primary" @click="
                 flg = !flg;
-                title = '修改密码';
+                title = '注册新账号';
               " :underline="false">注册新账号</el-link>
+                </div>
+              </el-col>
+              <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                  <el-link type="primary" @click="
+                flg = !flg;
+                title = '注册新账号';
+              " :underline="false">修改密码</el-link>
+                </div>
+              </el-col>
+
+            </el-row>
+
           </div>
         </el-form>
         <!-- 修改密码 -->
@@ -46,8 +64,8 @@
           </el-form-item>
 
           <el-form-item label prop="code">
-            <el-input v-model="formData.code" placeholder="请输入验证码" clearable prefix-icon="el-icon-eleme" :style="{ width: '100%' }"></el-input>
-            <el-button type="primary">获取验证码</el-button>
+            <el-input v-model="formData.code" placeholder="请输入验证码" clearable prefix-icon="el-icon-eleme" :style="{ width: '66%' }"></el-input>
+            <el-button type="primary" style="display:inline-block">获取验证码</el-button>
           </el-form-item>
 
           <el-form-item label prop="password">
@@ -61,7 +79,7 @@
               </div>
             </el-col>
           </el-row>
-          <el-row>
+          <el-row type="flex" class="row-bg" justify="center">
             <el-link type="primary" @click="flg = !flg" :underline="false">已有账号?去登陆</el-link>
           </el-row>
 
@@ -166,7 +184,8 @@ export default {
           if (!res.data.success) {
             this.refresh()
           } else {
-            this.$router.push(this.$route.query.redirect)
+            console.log(this.$route.query.redirect)
+            this.$router.push('/sms')
             if (this.notifyObj) {
               this.notifyObj.close()
             }
@@ -194,10 +213,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-// .loginCon .el-form-item {
-//   width: 250px;
-//   margin: 30px auto;
-// }
+.loginCon .el-form-item {
+  width: 332px;
+  margin: 40px auto;
+}
 .login {
   height: 100%;
   width: 100%;
@@ -233,15 +252,16 @@ export default {
     position: relative;
     // height: 120px;
     border-radius: 4px 4px 0 0;
+    color: rgba(70, 70, 70, 1);
     h3 {
       font-size: 22px;
-      color: #555;
+      font-weight: 600;
       font-weight: initial;
       padding-top: 23px;
     }
     .img {
-      width: 67px;
-      height: 69px;
+      width: 89px;
+      height: 92px;
       margin: 5px auto 32px auto;
       img {
         width: 100%;
@@ -250,7 +270,8 @@ export default {
     }
     p {
       font-size: 16px;
-      color: #888;
+      //   color: #888;
+      font-weight: 600;
       padding-top: 12px;
       text-align: center;
     }
@@ -269,7 +290,7 @@ export default {
   }
 }
 .loginBtn {
-  width: 56%;
+  width: 332px;
   margin: 0 auto;
   button {
     width: 100%;
@@ -307,6 +328,12 @@ export default {
   }
   i:last-child {
     margin-left: 7px;
+  }
+}
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 </style>

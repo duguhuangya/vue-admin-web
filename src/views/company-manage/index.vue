@@ -1,98 +1,119 @@
 <template>
-  <div class="company" style="height: 100%">
-    <div v-show="pageType == 'current'" class="common-table" ref="commonTable">
-      <el-card>
-        <div slot="header">
-          <!-- <span>基础表格</span> -->
-          <el-row type="flex" class="row-bg" justify="end">
-            <el-col :span="1">
-              <div class="grid-content bg-purple">
-                <el-button type="primary" size="small" @click="add">增加</el-button>
-              </div>
-            </el-col>
-          </el-row>
-
-        </div>
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="name" label="公司名称"> </el-table-column>
-          <el-table-column prop="zhanghao" label="关联账号"> </el-table-column>
-          <el-table-column prop="qixian" label="期限"> </el-table-column>
-          <el-table-column prop="data" label="添加时间"> </el-table-column>
-          <el-table-column prop="desc" label="备注"> </el-table-column>
-          <!-- <el-table-column prop="address" label="操作"> </el-table-column> -->
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
-              <el-dropdown size="small" split-button type="primary" @command="operationFn">
-                管理
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="a">账号设置</el-dropdown-item>
-                  <el-dropdown-item command="b">秘钥管理</el-dropdown-item>
-                  <el-dropdown-item command="c">IP设置</el-dropdown-item>
-                  <el-dropdown-item command="d">应用管理</el-dropdown-item>
-                  <el-dropdown-item command="e">渠道管理</el-dropdown-item>
-                  <el-dropdown-item command="f">删除公司</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
-      <!-- 新增 -->
-      <el-dialog v-bind="$attrs" width="30%" center v-on="$listeners" @open="onOpen" @close="onClose" title="新增公司" :visible.sync="dialogVisible">
-        <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="px">
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label-width="120px" label="公司名称" prop="companyName">
-                <el-input v-model="formData.companyName" placeholder="请输入公司名称" clearable :style="{width: '100%'}">
-                </el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label-width="120px" label="期限" prop="limits">
-                <el-input v-model="formData.limits" placeholder="请输入期限" clearable :style="{width: '100%'}">
-                </el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label-width="120px" label="关联账号" prop="relate">
-                <el-input v-model="formData.relate" placeholder="请输入关联账号" clearable :style="{width: '100%'}">
-                </el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label-width="120px" label="备注" prop="remark">
-                <el-input v-model="formData.remark" placeholder="请输入备注" clearable :style="{width: '100%'}">
-                </el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </el-form>
-        <div slot="footer" class="footer_btn">
-          <el-button @click="close" class="cancel">取消</el-button>
-          <el-button type="primary" @click="handelConfirm" class="sure">确定</el-button>
-        </div>
-      </el-dialog>
+  <div class="company_wrap">
+    <div class="bacBtn" v-show="pageType != 'current'" @click="pageType = 'current'">
+      <i class="el-icon-arrow-left"></i>返回
     </div>
-    <!--  -->
-    <!-- <task-detail v-show="pageType == 'checkDetail'" @backCurrent="pageType = 'current'"></task-detail> -->
-    <compTable :tableHeader="tableHeader" v-show="pageType == 'checkDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" @sort-events="handleSort" @filter-events="filterHandler" @click-events="handleClick" />
+    <div class="company">
+      <div v-show="pageType == 'current'" class="common-table" ref="commonTable">
+        <el-card>
+          <div slot="header">
+            <!-- <span>基础表格</span> -->
+            <el-row type="flex" class="row-bg" justify="end">
+              <el-col :span="1">
+                <div class="grid-content bg-purple">
+                  <el-button type="primary" size="small" @click="add">增加</el-button>
+                </div>
+              </el-col>
+            </el-row>
 
+          </div>
+          <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="name" label="公司名称"> </el-table-column>
+            <el-table-column prop="zhanghao" label="关联账号"> </el-table-column>
+            <el-table-column prop="qixian" label="期限"> </el-table-column>
+            <el-table-column prop="data" label="添加时间"> </el-table-column>
+            <el-table-column prop="desc" label="备注"> </el-table-column>
+            <!-- <el-table-column prop="address" label="操作"> </el-table-column> -->
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-dropdown size="small" @command="operationFn" trigger="click">
+                  <span class="el-dropdown-link">
+                    管理<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="account">账号设置</el-dropdown-item>
+                    <el-dropdown-item command="key">秘钥管理</el-dropdown-item>
+                    <el-dropdown-item command="ip">IP设置</el-dropdown-item>
+                    <el-dropdown-item command="app">应用管理</el-dropdown-item>
+                    <el-dropdown-item command="channel">渠道管理</el-dropdown-item>
+                    <el-dropdown-item command="del">删除公司</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </template>
+
+            </el-table-column>
+          </el-table>
+        </el-card>
+        <!-- 新增 -->
+        <el-dialog v-bind="$attrs" width="30%" center v-on="$listeners" @open="onOpen" @close="onClose" title="新增公司" :visible.sync="dialogVisible">
+          <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="px">
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label-width="120px" label="公司名称" prop="companyName">
+                  <el-input v-model="formData.companyName" placeholder="请输入公司名称" clearable :style="{width: '100%'}">
+                  </el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label-width="120px" label="期限" prop="limits">
+                  <el-input v-model="formData.limits" placeholder="请输入期限" clearable :style="{width: '100%'}">
+                  </el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label-width="120px" label="关联账号" prop="relate">
+                  <el-input v-model="formData.relate" placeholder="请输入关联账号" clearable :style="{width: '100%'}">
+                  </el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label-width="120px" label="备注" prop="remark">
+                  <el-input v-model="formData.remark" placeholder="请输入备注" clearable :style="{width: '100%'}">
+                  </el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-form>
+          <div slot="footer" class="footer_btn">
+            <el-button @click="close" class="cancel">取消</el-button>
+            <el-button type="primary" @click="handelConfirm" class="sure">确定</el-button>
+          </div>
+        </el-dialog>
+      </div>
+      <!-- 秘钥管理 -->
+      <compTable :tableHeader="tableHeader" v-show="pageType == 'keyDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" class="key_frame" />
+      <!-- Ip管理 -->
+      <compTable :tableHeader="tableHeader" v-show="pageType == 'ipDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" class="key_frame" />
+      <!-- 账号设置 -->
+      <compTable :tableHeader="tableHeader" v-show="pageType == 'accountDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" class="key_frame" />
+      <!-- 应用管理 -->
+      <compTable :tableHeader="tableHeader" v-show="pageType == 'appDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" class="key_frame" />
+      <!-- 渠道管理 -->
+      <compTable :tableHeader="tableHeader" v-show="pageType == 'channelDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" class="key_frame" />
+      <!-- 删除公司 -->
+      <compTable :tableHeader="tableHeader" v-show="pageType == 'delDetail'" @backCurrent="pageType = 'current'" :tableData="keyTableData" class="key_frame" />
+      <com-dialog :visibleDialog.sync="show" :title="tit" @close="handleClose" @handleleftButton="handleleft">
+        <slot>
+          <p class="slot_content">确认要停用当前公司所有权限</p>
+        </slot>
+      </com-dialog>
+    </div>
   </div>
+
 </template>
 
 <script>
 import { getPageTab1 } from '@/api/table'
 import compTable from '@/components/ComTable'
+import ComDialog from '@/components/ComDialog'
 export default {
-  components: { compTable },
+  components: { compTable, ComDialog },
   data() {
     return {
       tableData: [
@@ -124,7 +145,7 @@ export default {
           id: '1',
           key: 'RUNX',
           data: '2020-04-11',
-          desc: '这是一个描述文案'
+          desc: '这是一个IP描述文案'
         },
         {
           id: '2',
@@ -146,7 +167,6 @@ export default {
         {
           prop: 'key',
           label: 'Access Key Secret',
-          sortable: 'custom',
           minWidth: '75px'
         },
         {
@@ -203,7 +223,10 @@ export default {
         ]
       },
       dialogVisible: false,
-      pageType: 'current'
+      pageType: 'current',
+      show: false,
+      buttonTexts1: ['通过审核', '取消'],
+      tit: '警告'
     }
   },
   created() {
@@ -264,8 +287,44 @@ export default {
 
     // 管理操作
     operationFn(command) {
-      console.log(command)
-      this.pageType = 'checkDetail'
+      switch (command) {
+        case 'key':
+          this.pageType = 'keyDetail'
+          document.title = '秘钥管理'
+          break
+        case 'ip':
+          this.pageType = 'ipDetail'
+          document.title = 'IP设置'
+          break
+        case 'account':
+          this.pageType = 'accountDetail'
+          document.title = '账号设置'
+          break
+        case 'app':
+          this.pageType = 'appDetail'
+          document.title = '应用管理'
+          break
+        case 'channel':
+          this.pageType = 'channelDetail'
+          document.title = '渠道管理'
+          break
+        case 'del':
+          this.show = true
+          document.title = '删除公司'
+          break
+
+        default:
+          break
+      }
+    },
+    handleClick() {
+      this.show = true
+    },
+    handleClose() {
+      this.show = false
+    },
+    handleleft() {
+      this.show = false
     }
   }
 }
@@ -277,6 +336,15 @@ export default {
 }
 </style>
 <style lang="scss">
+.bacBtn {
+  background: #f0f3f4;
+  padding: 0 12px 12px 0;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 144, 51, 1);
+  cursor: pointer;
+}
 .el-table th {
   background: rgba(248, 250, 255, 1);
   height: 70px;
@@ -298,5 +366,39 @@ export default {
   }
   .sure {
   }
+}
+.el-card__header {
+  border-bottom: none;
+}
+
+.key_frame {
+  padding: 20px;
+  border: none;
+}
+.el-card {
+  border: none;
+}
+.el-card.is-always-shadow,
+.el-card.is-hover-shadow:focus,
+.el-card.is-hover-shadow:hover {
+  box-shadow: none;
+}
+.el-table--border::after,
+.el-table--group::after,
+.el-table::before {
+  display: none;
+}
+.slot_content {
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(70, 70, 70, 1);
+  text-align: center;
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
 }
 </style>

@@ -35,23 +35,6 @@ export const currencyRoutes = [
         hidden: true
     },
     {
-        path: '/company',
-        component: Layout,
-        name: 'Company',
-        redirect: '/company/index',
-        children: [
-            {
-                path: 'index',
-                name: 'Company-index',
-                component: () => import('@/views/company-manage'),
-                meta: {
-                    title: '公司管理',
-                    icon: 'el-icon-picture-outline'
-                }
-            }
-        ]
-    },
-    {
         path: '/account',
         component: Layout,
         name: 'Account',
@@ -69,6 +52,57 @@ export const currencyRoutes = [
         ]
     },
     {
+        path: '/company',
+        component: Layout,
+        name: 'Company',
+        redirect: '/company/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Company-index',
+                component: () => import('@/views/company-manage'),
+                meta: {
+                    title: '公司管理',
+                    icon: 'el-icon-picture-outline',
+                }
+            }
+        ]
+    },
+    {
+        path: '/content',
+        component: Layout,
+        name: 'Content',
+        redirect: '/company/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Content-query',
+                component: () => import('@/views/content-query'),
+                meta: {
+                    title: '内容查询',
+                    icon: 'el-icon-picture-outline',
+                }
+            }
+        ]
+    },
+    {
+        path: '/sms',
+        component: Layout,
+        name: 'Sms',
+        redirect: '/sms/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Sms-query',
+                component: () => import('@/views/sms-setting'),
+                meta: {
+                    title: '短信配置',
+                    icon: 'el-icon-picture-outline',
+                }
+            }
+        ]
+    },
+    {
         path: '/',
         name: 'Home',
         component: Layout,
@@ -78,39 +112,39 @@ export const currencyRoutes = [
                 path: 'dashbord',
                 name: 'Dashbord',
                 component: () => import('@/views/dashboard'),
-                meta: { title: '首页', icon: 'el-icon-s-data' }
+                meta: { title: '数据统计', icon: 'el-icon-s-data' }
             }
         ]
     },
-    {
-        path: '/personal',
-        name: 'Personal',
-        component: Layout,
-        redirect: '/personal/index',
-        hidden: true,
-        children: [
-            {
-                path: 'index',
-                name: 'Personal-index',
-                component: () => import('@/views/personal'),
-                meta: { title: '个人中心' }
-            }
-        ]
-    },
-    {
-        path: '/driver',
-        name: 'Driver',
-        component: Layout,
-        redirect: '/driver/index',
-        children: [
-            {
-                path: 'index',
-                name: 'Driver-index',
-                component: () => import('@/views/driver-page'),
-                meta: { title: '引导指南', icon: 'el-icon-s-flag' }
-            }
-        ]
-    }
+    // {
+    //     path: '/personal',
+    //     name: 'Personal',
+    //     component: Layout,
+    //     redirect: '/personal/index',
+    //     hidden: true,
+    //     children: [
+    //         {
+    //             path: 'index',
+    //             name: 'Personal-index',
+    //             component: () => import('@/views/personal'),
+    //             meta: { title: '个人中心' }
+    //         }
+    //     ]
+    // },
+    // {
+    //     path: '/driver',
+    //     name: 'Driver',
+    //     component: Layout,
+    //     redirect: '/driver/index',
+    //     children: [
+    //         {
+    //             path: 'index',
+    //             name: 'Driver-index',
+    //             component: () => import('@/views/driver-page'),
+    //             meta: { title: '引导指南', icon: 'el-icon-s-flag' }
+    //         }
+    //     ]
+    // }
 ]
 /*动态添加routers*/
 export const asyncRoutes = [
@@ -153,30 +187,30 @@ export const asyncRoutes = [
             }
         ]
     },
-    {
-        path: '/table',
-        name: 'Table',
-        redirect: '/table/base-table',
-        component: Layout,
-        meta: {
-            title: 'Table',
-            icon: 'el-icon-table iconfont'
-        },
-        children: [
-            {
-                path: 'base-table',
-                name: 'BaseTable',
-                component: () => import('@/views/table/common-table'),
-                meta: { title: '普通表格' }
-            },
-            {
-                path: 'complex-table',
-                name: 'ComplexTable',
-                component: () => import('@/views/table/complex-table'),
-                meta: { title: '复杂表格' }
-            }
-        ]
-    },
+    // {
+    //     path: '/table',
+    //     name: 'Table',
+    //     redirect: '/table/base-table',
+    //     component: Layout,
+    //     meta: {
+    //         title: 'Table',
+    //         icon: 'el-icon-table iconfont'
+    //     },
+    //     children: [
+    //         {
+    //             path: 'base-table',
+    //             name: 'BaseTable',
+    //             component: () => import('@/views/table/common-table'),
+    //             meta: { title: '普通表格' }
+    //         },
+    //         {
+    //             path: 'complex-table',
+    //             name: 'ComplexTable',
+    //             component: () => import('@/views/table/complex-table'),
+    //             meta: { title: '复杂表格' }
+    //         }
+    //     ]
+    // },
     {
         path: '/menu',
         name: 'Menu',
@@ -201,23 +235,23 @@ export const asyncRoutes = [
             }
         ]
     },
-    {
-        path: '/icons',
-        component: Layout,
-        name: 'Icons',
-        redirect: '/icons/index',
-        children: [
-            {
-                path: 'index',
-                name: 'Icons-index',
-                component: () => import('@/views/icons'),
-                meta: {
-                    title: 'Icons图标',
-                    icon: 'el-icon-picture-outline'
-                }
-            }
-        ]
-    },
+    // {
+    //     path: '/icons',
+    //     component: Layout,
+    //     name: 'Icons',
+    //     redirect: '/icons/index',
+    //     children: [
+    //         {
+    //             path: 'index',
+    //             name: 'Icons-index',
+    //             component: () => import('@/views/icons'),
+    //             meta: {
+    //                 title: 'Icons图标',
+    //                 icon: 'el-icon-picture-outline'
+    //             }
+    //         }
+    //     ]
+    // },
     {
         path: '/form',
         component: Layout,
@@ -235,96 +269,96 @@ export const asyncRoutes = [
             }
         ]
     },
-    {
-        path: '/components',
-        component: Layout,
-        name: 'Components',
-        redirect: '/components/slide-yz',
-        meta: { icon: 'el-icon-coin', title: '部分组件' },
-        children: [
-            {
-                path: 'slide-yz',
-                name: 'Sldie-yz',
-                component: () => import('@/views/components/slide-yz'),
-                meta: {
-                    icon: 'el-icon-s-claim',
-                    title: '滑动验证'
-                }
-            },
-            {
-                path: 'upload',
-                name: 'Upload',
-                component: () => import('@/views/components/pushImg'),
-                meta: {
-                    icon: 'el-icon-upload',
-                    title: '上传图片'
-                }
-            },
-            {
-                path: 'carousel',
-                name: 'Carousel',
-                component: () => import('@/views/components/carousel'),
-                meta: {
-                    icon: 'el-icon-lunbo iconfont',
-                    title: '轮播'
-                }
-            }
-        ]
-    },
-    {
-        path: '/echarts',
-        component: Layout,
-        name: 'Echarts',
-        redirect: '/echarts/slide-chart',
-        meta: { icon: 'el-icon-s-marketing', title: 'Echarts' },
-        children: [
-            {
-                path: 'slide-chart',
-                name: 'Sldie-chart',
-                component: () => import('@/views/echarts/slide-chart'),
-                meta: { title: '滑动charts' }
-            },
-            {
-                path: 'dynamic-chart',
-                name: 'Dynamic-chart',
-                component: () => import('@/views/echarts/dynamic-chart'),
-                meta: { title: '切换charts' }
-            },
-            {
-                path: 'map-chart',
-                name: 'Map-chart',
-                component: () => import('@/views/echarts/map-chart'),
-                meta: { title: 'map' }
-            }
-        ]
-    },
-    {
-        path: '/excel',
-        component: Layout,
-        name: 'Excel',
-        redirect: '/excel-operate/excel-out',
-        meta: { icon: 'el-icon-excel iconfont', title: 'Excel' },
-        children: [
-            {
-                path: 'excel-out',
-                name: 'Excel-out',
-                component: () => import('@/views/excel-operate/excel-out'),
-                meta: { title: 'Excel导出' }
-            },
-            {
-                path: 'excel-in',
-                name: 'Excel-in',
-                component: () => import('@/views/excel-operate/excel-in'),
-                meta: { title: 'Excel导入' }
-            },
-            {
-                path: 'mutiheader-out',
-                name: 'Mutiheader-out',
-                component: () => import('@/views/excel-operate/mutiheader-out'),
-                meta: { title: '多级表头导出' }
-            }
-        ]
-    },
+    // {
+    //     path: '/components',
+    //     component: Layout,
+    //     name: 'Components',
+    //     redirect: '/components/slide-yz',
+    //     meta: { icon: 'el-icon-coin', title: '部分组件' },
+    //     children: [
+    //         {
+    //             path: 'slide-yz',
+    //             name: 'Sldie-yz',
+    //             component: () => import('@/views/components/slide-yz'),
+    //             meta: {
+    //                 icon: 'el-icon-s-claim',
+    //                 title: '滑动验证'
+    //             }
+    //         },
+    //         {
+    //             path: 'upload',
+    //             name: 'Upload',
+    //             component: () => import('@/views/components/pushImg'),
+    //             meta: {
+    //                 icon: 'el-icon-upload',
+    //                 title: '上传图片'
+    //             }
+    //         },
+    //         {
+    //             path: 'carousel',
+    //             name: 'Carousel',
+    //             component: () => import('@/views/components/carousel'),
+    //             meta: {
+    //                 icon: 'el-icon-lunbo iconfont',
+    //                 title: '轮播'
+    //             }
+    //         }
+    //     ]
+    // },
+    // {
+    //     path: '/echarts',
+    //     component: Layout,
+    //     name: 'Echarts',
+    //     redirect: '/echarts/slide-chart',
+    //     meta: { icon: 'el-icon-s-marketing', title: 'Echarts' },
+    //     children: [
+    //         {
+    //             path: 'slide-chart',
+    //             name: 'Sldie-chart',
+    //             component: () => import('@/views/echarts/slide-chart'),
+    //             meta: { title: '滑动charts' }
+    //         },
+    //         {
+    //             path: 'dynamic-chart',
+    //             name: 'Dynamic-chart',
+    //             component: () => import('@/views/echarts/dynamic-chart'),
+    //             meta: { title: '切换charts' }
+    //         },
+    //         {
+    //             path: 'map-chart',
+    //             name: 'Map-chart',
+    //             component: () => import('@/views/echarts/map-chart'),
+    //             meta: { title: 'map' }
+    //         }
+    //     ]
+    // },
+    // {
+    //     path: '/excel',
+    //     component: Layout,
+    //     name: 'Excel',
+    //     redirect: '/excel-operate/excel-out',
+    //     meta: { icon: 'el-icon-excel iconfont', title: 'Excel' },
+    //     children: [
+    //         {
+    //             path: 'excel-out',
+    //             name: 'Excel-out',
+    //             component: () => import('@/views/excel-operate/excel-out'),
+    //             meta: { title: 'Excel导出' }
+    //         },
+    //         {
+    //             path: 'excel-in',
+    //             name: 'Excel-in',
+    //             component: () => import('@/views/excel-operate/excel-in'),
+    //             meta: { title: 'Excel导入' }
+    //         },
+    //         {
+    //             path: 'mutiheader-out',
+    //             name: 'Mutiheader-out',
+    //             component: () => import('@/views/excel-operate/mutiheader-out'),
+    //             meta: { title: '多级表头导出' }
+    //         }
+    //     ]
+    // },
     {
         path: '/error',
         component: Layout,

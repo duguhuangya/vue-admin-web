@@ -70,19 +70,20 @@
     <!-- end -->
     <!-- lineEcharts -->
     <line-charts class="lCharts" :lineChartData="lineChartData"></line-charts>
+    <line-charts class="lCharts" :lineChartData="lineChartData"></line-charts>
     <!-- end -->
     <!-- table and pie -->
-    <el-row class="tableChart">
+    <!-- <el-row class="tableChart">
       <el-col :span="16">
         <table-show :tableData="tableData" class="tableShow"></table-show>
       </el-col>
       <el-col :span="8">
         <pie-charts class="pieCharts"></pie-charts>
       </el-col>
-    </el-row>
+    </el-row> -->
     <!-- end -->
     <!-- bar chart -->
-    <bar-charts class="barCharts" :barData="barData"></bar-charts>
+    <!-- <bar-charts class="barCharts" :barData="barData"></bar-charts> -->
     <!-- end -->
   </div>
 </template>
