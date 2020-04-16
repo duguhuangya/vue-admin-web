@@ -5,8 +5,8 @@ import store from '@/store'
 Vue.use(Router)
 
 import Layout from '@/layout'
-// import NavTest from './modules/nav-test'
-// import { Message } from 'element-ui'
+import NavTest from './modules/nav-test'
+import { Message } from 'element-ui'
 import getTitle from '@/libs/getTitle'
 
 /**
@@ -34,20 +34,73 @@ export const currencyRoutes = [
         component: () => import('@/views/error-page/404.vue'),
         hidden: true
     },
-    // {
-    //     path: '/',
-    //     name: 'Home',
-    //     component: Layout,
-    //     redirect: '/dashbord',
-    //     children: [
-    //         {
-    //             path: 'dashbord',
-    //             name: 'Dashbord',
-    //             component: () => import('@/views/dashboard'),
-    //             meta: { title: '数据统计', icon: 'el-icon-s-data' }
-    //         }
-    //     ]
-    // },
+    {
+        path: '/',
+        name: 'Home',
+        component: Layout,
+        redirect: '/dashbord',
+        children: [
+            {
+                path: 'dashbord',
+                name: 'Dashbord',
+                component: () => import('@/views/dashboard'),
+                meta: { title: '数据统计', icon: 'el-icon-s-data' }
+            }
+        ]
+    },
+    {
+        path: '/company',
+        component: Layout,
+        name: 'Company',
+        redirect: '/company/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Company-index',
+                component: () => import('@/views/company-manage'),
+                meta: {
+                    title: '公司管理',
+                    icon: 'el-icon-office-building',
+                }
+            }
+        ]
+    },
+    {
+        path: '/account',
+        component: Layout,
+        name: 'Account',
+        redirect: '/account/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Account-index',
+                component: () => import('@/views/account-manage'),
+                meta: {
+                    title: '账户管理',
+                    icon: 'el-icon-user-solid'
+                }
+            }
+        ]
+    },
+
+    {
+        path: '/content',
+        component: Layout,
+        name: 'Content',
+        redirect: '/company/index',
+        children: [
+            {
+                path: 'index',
+                name: 'Content-query',
+                component: () => import('@/views/content-query'),
+                meta: {
+                    title: '内容查询',
+                    icon: 'el-icon-search',
+                }
+            }
+        ]
+    },
+
     {
         path: '/sms',
         component: Layout,
@@ -65,6 +118,12 @@ export const currencyRoutes = [
             }
         ]
     },
+    {
+        path: '*',
+        name: '*404',
+        redirect: '/404',
+        hidden: true
+    }
     // {
     //     path: '/personal',
     //     name: 'Personal',
@@ -132,58 +191,6 @@ export const asyncRoutes = [
     //             meta: {
     //                 title: '权限设置',
     //                 icon: 'el-icon-s-tools'
-    //             }
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: '/company',
-    //     component: Layout,
-    //     name: 'Company',
-    //     redirect: '/company/index',
-    //     children: [
-    //         {
-    //             path: 'index',
-    //             name: 'Company-index',
-    //             component: () => import('@/views/company-manage'),
-    //             meta: {
-    //                 title: '公司管理',
-    //                 icon: 'el-icon-office-building',
-    //             }
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: '/account',
-    //     component: Layout,
-    //     name: 'Account',
-    //     redirect: '/account/index',
-    //     children: [
-    //         {
-    //             path: 'index',
-    //             name: 'Account-index',
-    //             component: () => import('@/views/account-manage'),
-    //             meta: {
-    //                 title: '账户管理',
-    //                 icon: 'el-icon-user-solid'
-    //             }
-    //         }
-    //     ]
-    // },
-
-    // {
-    //     path: '/content',
-    //     component: Layout,
-    //     name: 'Content',
-    //     redirect: '/company/index',
-    //     children: [
-    //         {
-    //             path: 'index',
-    //             name: 'Content-query',
-    //             component: () => import('@/views/content-query'),
-    //             meta: {
-    //                 title: '内容查询',
-    //                 icon: 'el-icon-search',
     //             }
     //         }
     //     ]
@@ -384,12 +391,7 @@ export const asyncRoutes = [
     //     meta: { icon: 'el-icon-link', title: '项目链接' }
     //   },
     // NavTest,
-    {
-        path: '*',
-        name: '*404',
-        redirect: '/404',
-        hidden: true
-    }
+
 ]
 const creatRouter = () => {
     return new Router({
