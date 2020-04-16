@@ -148,7 +148,7 @@ export default {
     }
   },
   mounted() {
-    this.shopTip()
+    // this.shopTip()
   },
   methods: {
     //确认修改密码
@@ -171,7 +171,8 @@ export default {
     loginYz(form) {
       this.$refs[form].validate(valid => {
         if (valid) {
-          this.showSlide = true
+          //   this.showSlide = true
+          this._login()
         } else {
           return
         }

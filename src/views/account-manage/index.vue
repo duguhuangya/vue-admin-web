@@ -29,26 +29,16 @@
               </el-col>
               <el-col :span="1">
                 <div class="grid-content bg-purple">
-                  <el-button type="primary" size="small" @click="add">增加</el-button>
+                  <el-button type="primary" size="small" @click="add">创建账号</el-button>
                 </div>
               </el-col>
             </el-row>
 
           </div>
-          <!-- <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="name" label="公司名称"> </el-table-column>
-            <el-table-column prop="zhanghao" label="关联账号"> </el-table-column>
-            <el-table-column prop="qixian" label="期限"> </el-table-column>
-            <el-table-column prop="data" label="添加时间"> </el-table-column>
-            <el-table-column prop="desc" label="备注"> </el-table-column>
-            <el-table-column label="操作">
-            
-            </el-table-column>
-          </el-table> -->
           <table-template :tableData="keyTableData" :indexShow="false" :tableOperationText1="tableOperationText1" :tableColumns="tableHeader" :loading="loading" :selectionShow="false" :selectColumns="false" @tableOperationBtn1Handle="handleBtn1" :cellBackColor="cellBackColor"></table-template>
         </el-card>
         <!-- 新增 -->
-        <el-dialog v-bind="$attrs" width="30%" center v-on="$listeners" @open="onOpen" @close="onClose" title="新增公司" :visible.sync="dialogVisible">
+        <el-dialog v-bind="$attrs" width="30%" center v-on="$listeners" @open="onOpen" @close="onClose" title="创建账号" :visible.sync="dialogVisible">
           <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="px">
             <el-row>
               <el-col :span="24">
@@ -238,29 +228,7 @@ export default {
     }
   },
   created() {
-    this._getPageTab1(1, 10)
-  },
-  filters: {
-    statusText(val) {
-      if (val === undefined) return
-      if (val === 0) {
-        return '已完成'
-      } else if (val === 1) {
-        return '进行中'
-      } else {
-        return '已取消'
-      }
-    },
-    tagClass(val) {
-      if (val === undefined) return
-      if (val === 0) {
-        return 'success'
-      } else if (val === 1) {
-        return 'warning'
-      } else {
-        return 'danger'
-      }
-    }
+    // this._getPageTab1(1, 10)
   },
   methods: {
     handleBtn1() {

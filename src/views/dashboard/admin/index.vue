@@ -5,12 +5,7 @@
       <el-col :span="6">
         <div class="cardItem">
           <div class="cardItem_txt">
-            <count-to
-              class="cardItem_p0 color-green1"
-              :startVal="startVal"
-              :endVal="vistors"
-              :duration="2000"
-            ></count-to>
+            <count-to class="cardItem_p0 color-green1" :startVal="startVal" :endVal="vistors" :duration="2000"></count-to>
             <p class="cardItem_p1">Total Visitors</p>
           </div>
           <div class="cardItem_icon">
@@ -21,12 +16,7 @@
       <el-col :span="6">
         <div class="cardItem">
           <div class="cardItem_txt">
-            <count-to
-              class="cardItem_p0 color-blue"
-              :startVal="startVal"
-              :endVal="message"
-              :duration="2000"
-            ></count-to>
+            <count-to class="cardItem_p0 color-blue" :startVal="startVal" :endVal="message" :duration="2000"></count-to>
             <p class="cardItem_p1">Messages</p>
           </div>
           <div class="cardItem_icon">
@@ -37,12 +27,7 @@
       <el-col :span="6">
         <div class="cardItem">
           <div class="cardItem_txt">
-            <count-to
-              class="cardItem_p0 color-red"
-              :startVal="startVal"
-              :endVal="order"
-              :duration="2000"
-            ></count-to>
+            <count-to class="cardItem_p0 color-red" :startVal="startVal" :endVal="order" :duration="2000"></count-to>
             <p class="cardItem_p1">Total Order Placeed</p>
           </div>
           <div class="cardItem_icon">
@@ -53,12 +38,7 @@
       <el-col :span="6">
         <div class="cardItem">
           <div class="cardItem_txt">
-            <count-to
-              class="cardItem_p0 color-green2"
-              :startVal="startVal"
-              :endVal="profit"
-              :duration="2000"
-            ></count-to>
+            <count-to class="cardItem_p0 color-green2" :startVal="startVal" :endVal="profit" :duration="2000"></count-to>
             <p class="cardItem_p1">Total Profit</p>
           </div>
           <div class="cardItem_icon">
@@ -91,9 +71,6 @@
 <script>
 import CountTo from 'vue-count-to'
 import LineCharts from './components/LineCharts'
-import PieCharts from './components/PieCharts'
-import TableShow from './components/TableShow'
-import BarCharts from './components/BarCharts'
 import {
   getCardsData,
   getTableData,
@@ -114,14 +91,11 @@ export default {
     }
   },
   created() {
-    this._getAllData()
+    // this._getAllData()
   },
   components: {
     CountTo,
-    LineCharts,
-    PieCharts,
-    TableShow,
-    BarCharts
+    LineCharts
   },
   methods: {
     _getAllData() {

@@ -84,12 +84,12 @@
 </template>
 
 <script>
-import { getPageTab1 } from '@/api/table'
+// import { getPageTab1 } from '@/api/table'
 import { getSmsList, setSmsData, setSmsTem } from '@/api/sms'
-import ComDialog from '@/components/ComDialog'
+// import ComDialog from '@/components/ComDialog'
 import { deepClone } from '@/libs/util.js'
 export default {
-  components: { ComDialog },
+  //   components: { ComDialog },
   data() {
     return {
       formData: {},
@@ -116,6 +116,7 @@ export default {
       this.currentPage = val
       this._getPageTab1(val, this.pageSize)
     },
+    // 获取短信配置列表数据
     _getPageTab1() {
       getSmsList()
         .then(res => {
@@ -140,7 +141,7 @@ export default {
           this.$message.error(error.message)
         })
     },
-    // 编辑
+    // 编辑事件
     handleEdit(row, ty) {
       this.formData = deepClone(row)
       this.verifyCode = row.templateCode
@@ -150,7 +151,6 @@ export default {
       } else {
         this.dialogFormVisible1 = true
       }
-      //点击编辑
     },
     onOpen() {},
     onClose() {
@@ -161,6 +161,7 @@ export default {
       this.dialogFormVisible = false
       this.dialogFormVisible1 = false
     },
+    // 确认按钮 更新编辑
     handelConfirm(ty) {
       if (ty == 'a') {
         let params = {
@@ -170,8 +171,12 @@ export default {
         }
         setSmsData(params)
           .then(res => {
-            const { code, data } = res
+            const { code } = res
             if (code == 200) {
+              this.$message({
+                message: '配置更新成功',
+                type: 'success'
+              })
               this.close()
               this._getPageTab1()
             }
@@ -188,8 +193,12 @@ export default {
 
         setSmsTem(params)
           .then(res => {
-            const { code, data } = res
+            const { code } = res
             if (code == 200) {
+              this.$message({
+                message: '配置更新成功',
+                type: 'success'
+              })
               this.close()
               this._getPageTab1()
             }
